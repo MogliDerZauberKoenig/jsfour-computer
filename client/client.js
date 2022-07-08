@@ -217,6 +217,7 @@ on('__cfx_nui:jsfour-computer:tempData', ( data, cb ) => {
 
 // Remove NUI focus < called from NUI
 on('__cfx_nui:jsfour-computer:close', ( data, cb ) => {
+    console.log("closing nui...");
     SetNuiFocus(false, false);
     cb(true);
 

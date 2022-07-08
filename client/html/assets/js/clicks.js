@@ -236,20 +236,45 @@ $('body').on('click', '.click', function () {
             break;
         case 'program-fullscreen':
             // Toggle fullscreen of a program
+            // edit: toggle fullscreen or set back to old size
             let elem = $(`#desktop .program-${$(this).attr('program')}`).closest('.program-wrapper');
+            let containerElem = $('#desktop');
 
-            if ( elem.find('.container').width() >= 700 ) {
+            /*if ( elem.find('.container').width() >= 700 ) {
                 elem.find('.container').css('width', '85%');
             } else {
                 elem.find('.container').css('width', '70%');
-            }
+            }*/
             
-            elem.css({
+            /*elem.css({
                 'top': 0,
                 'left': 0,
                 'width': elem.width() === 1012 ? '810px' : '100%',
                 'height': elem.height() === 518 ? '410px' : '94%'
-            });
+            });*/
+            if(elem.width() !== containerElem.width() || elem.height() !== containerElem.height()) {
+                elem.data('non-fullscreen-coords', {
+                    x: elem.position().left,
+                    y: elem.position().top,
+                    width: elem.width(),
+                    height: elem.height()
+                });
+
+                elem.css({
+                    'top': 0,
+                    'left': 0,
+                    'width': `${containerElem.width()}px`,
+                    'height': `${containerElem.height()}px`
+                });
+            } else {
+                let data = elem.data('non-fullscreen-coords');
+                elem.css({
+                    'top': `${data.y}px`,
+                    'left': `${data.x}px`,
+                    'width': `${data.width}px`,
+                    'height': `${data.height}px`
+                });
+            }
             break;
         case 'program-refresh':
             // Refresh a program, calls the program refresh function refreshprogram() where program is the program name

@@ -365,6 +365,8 @@ function loadPrograms() {
                                             $(this).addClass('program-active');
                                         }
                                     });
+
+                                    $(`.program-wrapper`).resizable();
                                 });
                             }
                         }
@@ -433,7 +435,7 @@ window.addEventListener('message', ( event ) => {
                             $('#computer-loading').hide();
 
                             $('#computer-frame').animate({
-                                marginTop: '10%',
+                                marginTop: '0%',
                             }, 500, () => {
                                 setTimeout(() => {
                                     $('#computer-loading-content').fadeIn(500);
@@ -455,7 +457,7 @@ window.addEventListener('message', ( event ) => {
                             $('#computer-loading').show();
 
                             $('#computer-frame').animate({
-                                marginTop: '10%',
+                                marginTop: '0%',
                             }, 500, () => {
                                 setTimeout(() => {
                                     $('#computer-loading-content').fadeIn(500);
@@ -482,7 +484,7 @@ window.addEventListener('message', ( event ) => {
                         }
 
                         $('#computer-frame').animate({
-                            marginTop: '5%',
+                            marginTop: '0%',
                         }, 500, () => {
                             setTimeout(() => {
                                 $('#computer-loading-content').fadeIn(500);
@@ -746,7 +748,7 @@ $(() => {
             iconSlots = JSON.stringify(iconSlots);
 
             if ( loggedInUser && ( JSON.stringify(loggedInUser.iconslots) != iconSlots ) ) {
-                fetch('http://jsfour-computer/jsfour-computer:close', {
+                fetch(`http://${ GetParentResourceName() }/jsfour-computer:close`, {
                     method: 'POST',
                     body: JSON.stringify({
                         type: 'updateUserIconSlots',
@@ -758,7 +760,7 @@ $(() => {
                     })
                 });
             } else {
-                fetch('http://jsfour-computer/jsfour-computer:close');
+                fetch(`http://${ GetParentResourceName() }/jsfour-computer:close`);
             } 
         }
     });
